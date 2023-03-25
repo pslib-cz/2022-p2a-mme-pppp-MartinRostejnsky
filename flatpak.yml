@@ -1,0 +1,20 @@
+app-id: cz.tttie.Kiosk
+runtime: org.kde.Platform
+runtime-version: '5.15-22.08'
+sdk: org.kde.Sdk
+base: com.riverbankcomputing.PyQt.BaseApp
+base-version: '5.15-22.08'
+command: /app/run.sh
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+finish-args:
+  - --socket=wayland
+  - --device=dri
+modules:
+  - name: app
+    buildsystem: simple
+    build-commands:
+        - cp -a . /app
+    sources:
+      - type: dir
+        path: app

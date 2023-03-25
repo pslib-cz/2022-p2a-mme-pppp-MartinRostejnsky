@@ -1,0 +1,4 @@
+build/
+.flatpak-builder/
+out/
+/kiosk.flatpak

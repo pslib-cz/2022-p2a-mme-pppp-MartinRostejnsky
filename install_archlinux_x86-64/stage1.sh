@@ -59,7 +59,7 @@ if [[ $MICROCODE ]]; then
 fi
 
 #TODO: It might be worth getting something like a session manager into play here
-pacstrap -K /mnt base linux linux-firmware cage nano flatpak networkmanager grub $MICROCODE
+pacstrap -K /mnt base linux linux-firmware cage nano flatpak networkmanager efibootmgr grub $MICROCODE
 
 genfstab -U /mnt >> /mnt/etc/fstab
 

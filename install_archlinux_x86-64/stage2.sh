@@ -19,7 +19,7 @@ passwd root
 
 echo "Installing GRUB:"
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub2/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager.service
 

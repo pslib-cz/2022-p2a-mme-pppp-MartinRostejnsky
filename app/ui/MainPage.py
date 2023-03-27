@@ -38,6 +38,7 @@ class MainPage(QWidget):
             self.main_ui.navigateToPage(target_page)
 
         btn = QPushButton()
+        btn.setFlat(True)
 
         ly = QHBoxLayout(btn)
 

@@ -16,7 +16,7 @@ font = app.font()
 font.setPixelSize(24)
 app.setFont(font)
 
-window.setMinimumSize(QSize(1600, 900))
+window.resize(QSize(1600, 900))
 window.setStyleSheet(windowStylesheet)
 window.setCentralWidget(MainUI())
 

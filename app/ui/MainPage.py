@@ -42,6 +42,8 @@ class MainPage(QWidget):
 
         ly = QHBoxLayout(btn)
 
+        ly.setContentsMargins(32, 32, 32, 32)
+
         iconWidget = QLabel()
         iconWidget.setPixmap(QPixmap(f"icons/{icon}.svg"))
 

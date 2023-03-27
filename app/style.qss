@@ -14,7 +14,6 @@ QLabel#where_to_go {
 
 MainPage > QPushButton {
     background-color: #2f65b0;
-    padding: 32px;
     border: 0
 }
 

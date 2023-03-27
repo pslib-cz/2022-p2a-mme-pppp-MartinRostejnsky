@@ -2,8 +2,9 @@ from PyQt5.Qt import *
 
 
 class MainPage(QWidget):
-    def __init__(self):
+    def __init__(self, main_ui):
         super(QWidget, self).__init__()
+        self.main_ui = main_ui
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
@@ -22,7 +23,7 @@ class MainPage(QWidget):
         grid.addWidget(self._createPushButton("Rozvrh", "timetable"), 0, 0)
         grid.addWidget(self._createPushButton("Suplování", "suplovani"), 0, 1)
         grid.addWidget(self._createPushButton("Web", "web"), 1, 0)
-        grid.addWidget(self._createPushButton("O aplikaci", "about"), 1, 1)
+        grid.addWidget(self._createPushButton("O aplikaci", "about", "other"), 1, 1)
         grid.setSpacing(100)
 
         layout.addWidget(label)
@@ -31,7 +32,11 @@ class MainPage(QWidget):
         layout.setSpacing(50)
         self.setLayout(layout)
 
-    def _createPushButton(self, label, icon):
+    def _createPushButton(self, label, icon, target_page = None):
+        def navigate():
+            print(f"Navigating to {target_page}")
+            self.main_ui.navigateToPage(target_page)
+
         btn = QPushButton()
 
         ly = QHBoxLayout(btn)
@@ -53,5 +58,8 @@ class MainPage(QWidget):
 
         btn.setMinimumHeight(120)
         btn.setMinimumWidth(360)
+
+        if target_page is not None:
+            btn.clicked.connect(navigate)
 
         return btn

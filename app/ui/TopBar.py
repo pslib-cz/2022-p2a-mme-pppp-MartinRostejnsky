@@ -1,9 +1,12 @@
 from PyQt5.Qt import *
 from datetime import datetime
+from .components.ClickableLabel import ClickableLabel
 
 class TopBar(QWidget):
-    def __init__(self):
+    def __init__(self, main_ui):
         super(QWidget, self).__init__()
+        self.main_ui = main_ui
+
         self.setFixedHeight(96)
 
         palette = QPalette()
@@ -18,9 +21,11 @@ class TopBar(QWidget):
         leftLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
         leftLabel.setPixmap(QPixmap("icons/logo.svg"))
 
-        centralLabel = QLabel()
+        centralLabel = ClickableLabel()
         centralLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         centralLabel.setPixmap(QPixmap("icons/home_button.svg"))
+        centralLabel.clicked.connect(self.on_home_click)
+        centralLabel.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         now = datetime.now()
 
@@ -45,3 +50,8 @@ class TopBar(QWidget):
 
 
         self.rightLabel.setText(now.strftime("%d. %m. %Y %H:%M:%S"))
+
+    def on_home_click(self):
+        print("Clicked home button")
+
+        self.main_ui.navigateToPage("main")

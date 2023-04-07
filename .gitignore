@@ -1,5 +1,7 @@
 build/
+build-gui/
 .flatpak-builder/
 out/
 /kiosk.flatpak
+/kiosk-gui.flatpak
 __pycache__/

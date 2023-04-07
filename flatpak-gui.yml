@@ -1,0 +1,15 @@
+app-id: cz.tttie.KiOS.UI
+branch: "master"
+build-extension: true
+runtime: cz.tttie.KiOS
+runtime-version: 'master'
+sdk: org.kde.Sdk//5.15-22.08
+modules:
+  - name: app
+    buildsystem: simple
+    build-commands:
+        - cp -a . /app/qml
+    sources:
+      - type: dir
+        path: qml
+

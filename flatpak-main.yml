@@ -1,4 +1,5 @@
-app-id: cz.tttie.Kiosk
+app-id: cz.tttie.KiOS
+branch: 'master'
 runtime: org.kde.Platform
 runtime-version: '5.15-22.08'
 sdk: org.kde.Sdk
@@ -8,8 +9,10 @@ command: /app/run.sh
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
 finish-args:
+  - --share=network
   - --socket=wayland
   - --device=dri
+  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
 modules:
   - name: app
     buildsystem: simple
@@ -18,3 +21,10 @@ modules:
     sources:
       - type: dir
         path: app
+add-extensions:
+  cz.tttie.KiOS.UI: 
+    version: 'master'
+    subdirectories: false
+    directory: qml
+    no-autodownload: true
+    autodelete: true

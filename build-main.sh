@@ -1,3 +1,9 @@
 #!/bin/bash
-flatpak-builder --force-clean --repo=out/ ./build flatpak-main.yml
+ARGS=""
+OUT_APPEND=""
+if [[ -n $IS_AARCH64 ]]; then
+ARGS="--arch=aarch64"
+OUT_APPEND="-aarch64"
+fi
+flatpak-builder $ARGS --force-clean --repo=out$OUT_APPEND/ ./build flatpak-main.yml
 

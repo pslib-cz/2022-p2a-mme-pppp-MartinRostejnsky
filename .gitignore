@@ -6,4 +6,6 @@ out-aarch64/
 install_archlinux_aarch64_rpi/arch_linux_base.tar.gz
 /kiosk.flatpak
 /kiosk-gui.flatpak
+/kiosk-aarch64.flatpak
+/kiosk-gui-aarch64.flatpak
 __pycache__/

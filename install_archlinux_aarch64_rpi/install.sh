@@ -35,7 +35,7 @@ mount "${partitions[1]}" /tmp/mnt/root
 
 if [[ ! -f arch_linux_base.tar.gz ]]; then
     echo "Downloading Arch Linux base image..."
-    curl -o arch_linux_base.tar.gz http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz
+    curl -Lo arch_linux_base.tar.gz http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz
 fi
 
 tar -xpf arch_linux_base.tar.gz -C /tmp/mnt/root

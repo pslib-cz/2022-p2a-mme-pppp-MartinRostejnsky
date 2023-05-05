@@ -49,7 +49,7 @@ ln -sf /usr/share/zoneinfo/Europe/Prague /tmp/mnt/root/etc/localtime
 echo "LANG=en_US.UTF-8" > /tmp/mnt/root/etc/locale.conf
 echo "KEYMAP=cz" > /tmp/mnt/root/etc/vconsole.conf
 
-echo "kiosk" > /etc/hostname
+echo "kiosk" > /tmp/mnt/root/etc/hostname
 
 if [[ -n $IS_RPI4 ]]; then
     # RPI4 boards use a different identifier for the SD card

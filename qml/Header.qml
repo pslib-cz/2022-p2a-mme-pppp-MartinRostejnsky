@@ -81,8 +81,10 @@ Item {
         anchors.right: parent.right
 
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#60000000" }
-            GradientStop { position: 1.0; color: "#10000000" }
+            GradientStop { position: 0.0; color: "#41000000" }
+            GradientStop { position: 0.20; color: "#40000000" }
+            GradientStop { position: 0.40; color: "#35000000" }
+            GradientStop { position: 1.0; color: "#04000000" }
         }
     }
 }

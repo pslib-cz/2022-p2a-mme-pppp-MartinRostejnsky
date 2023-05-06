@@ -2,6 +2,7 @@ from PyQt5.Qt import *
 from PyQt5.QtWebEngine import *
 
 from Meta import Meta
+from URLUtils import URLUtils
 from sys import argv, exit
 from os import scandir
 
@@ -23,6 +24,7 @@ if font_dir.exists():
 engine = QQmlApplicationEngine()
 
 qmlRegisterType(Meta, 'Meta', 1, 0, 'Meta')
+qmlRegisterType(URLUtils, 'URLUtils', 1, 0, 'URLUtils')
 
 engine.quit.connect(app.quit)
 

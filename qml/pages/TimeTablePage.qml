@@ -5,4 +5,7 @@ import "../components" as Components
 
 Components.WebView {
     url: "https://bakalar.pslib.cz/rodice/Timetable/Public"
+    allowedOrigins: [
+        "bakalar.pslib.cz"
+    ]
 }

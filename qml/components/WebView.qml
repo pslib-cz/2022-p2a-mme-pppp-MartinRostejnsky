@@ -6,31 +6,52 @@ import QtGraphicalEffects 1.15
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.15
 import QtWebEngine 1.10
+import URLUtils 1.0
 import "../utils" as Utils
 import "../api" as API
 
 WebEngineView {
-    property var allowed: [
-        "https://pslib.cz/",
-        "https://bakalar.pslib.cz/",
-        "http://praxe2.pslib.cloud/",
-        "https://praxe2.pslib.cloud/" //musi byt oboje, protoze odkaz odkazuje na http ktery to presmeruje na https...
+    property var allowedOrigins: [
+        "pslib.cz",
+        // Opravdu chceme, aby se nekdo registroval z kiosku na praxe?
+        "praxe2.pslib.cloud"
     ]
+
+    property var allowedUrls: [
+        "https://bakalar.pslib.cz/rodice/Timetable/Public",
+        "https://bakalar.pslib.cz/rodice/next/zmeny.aspx"
+    ];
+
+    URLUtils {
+        id: urlUtils
+    }
+
     profile.offTheRecord: true
     id: webview
     onNewViewRequested: function(request) {
-        print(request.requestedUrl)
-        if (allowed.some(sub => String(request.requestedUrl).startsWith(sub))) {
+        print(`New view requested at ${request.requestedUrl}, origin: ${urlUtils.getOrigin(request.requestedUrl)}`)
+        if (allowedOrigins.includes(urlUtils.getOrigin(request.requestedUrl)) 
+            || allowedUrls.some(x => String(request.requestedUrl).startsWith(x))) {
             request.openIn(webview)
+        } else {
+            // TODO: Maybe it would be worth it to let the user know?
+            print(`${request.requestedUrl} isn't in the list of allowed origins`)
         }
     }
     onNavigationRequested: function(request) {
-        print(request.url)
-        if (allowed.some(sub => String(request.url).startsWith(sub))) {
+        print(`Navigation requested at ${request.url}, origin: ${urlUtils.getOrigin(request.url)}`)
+        if (allowedOrigins.includes(urlUtils.getOrigin(request.url)) 
+            || allowedUrls.some(x => String(request.url).startsWith(x))) {
             request.action = WebEngineNavigationRequest.AcceptRequest
         } else {
+            print(`${request.url} isn't in the list of allowed origins`)
+            // TODO: Maybe it would be worth it to let the user know?
             request.action = WebEngineNavigationRequest.IgnoreRequest
         }
     }
 
+    onContextMenuRequested: function(ev) {
+        // Disallow context menus
+        ev.accepted = true;
+    }
 }

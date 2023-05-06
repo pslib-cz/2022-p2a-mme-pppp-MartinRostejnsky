@@ -12,21 +12,21 @@ import "../api" as API
 WebEngineView {
     property var allowed: [
         "https://pslib.cz/",
-        "http://praxe2.pslib.cloud/"
+        "http://praxe2.pslib.cloud/",
+        "https://praxe2.pslib.cloud/" //musi byt oboje, protoze odkaz odkazuje na http ktery to presmeruje na https...
     ]
     profile.offTheRecord: true
     id: webview
     onNewViewRequested: function(request) {
         print(request.requestedUrl)
-        if (allowed.includes(String(request.requestedUrl))) {
+        if (allowed.some(sub => String(request.requestedUrl).startsWith(sub))) {
             request.openIn(webview)
         }
     }
     onNavigationRequested: function(request) {
         print(request.url)
-        if (allowed.includes(String(request.url))) {
+        if (allowed.some(sub => String(request.url).startsWith(sub))) {
             request.action = WebEngineNavigationRequest.AcceptRequest
-            print("skinhead")
         } else {
             request.action = WebEngineNavigationRequest.IgnoreRequest
         }

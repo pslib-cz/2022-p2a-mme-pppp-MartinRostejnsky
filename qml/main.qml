@@ -14,6 +14,8 @@ ApplicationWindow {
 
     font.family: "Noto Sans"
 
+    visibility: "FullScreen"
+
     title: "KiOS"
 
     header: Header {

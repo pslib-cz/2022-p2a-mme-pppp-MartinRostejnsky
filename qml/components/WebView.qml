@@ -12,7 +12,7 @@ import "../api" as API
 WebEngineView {
     property var allowed: [
         "https://pslib.cz/",
-        "https://bakalar.pslib.cz",
+        "https://bakalar.pslib.cz/",
         "http://praxe2.pslib.cloud/",
         "https://praxe2.pslib.cloud/" //musi byt oboje, protoze odkaz odkazuje na http ktery to presmeruje na https...
     ]

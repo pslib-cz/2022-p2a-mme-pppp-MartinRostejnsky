@@ -11,6 +11,8 @@ Button {
 
         Item {
             Layout.fillWidth: true
+
+            visible: root.text !== ""
         }
 
         Utils.DPIAwareSVGImage {
@@ -26,10 +28,14 @@ Button {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
+
+            visible: root.text !== ""
         }
 
         Item {
             Layout.fillWidth: true
+
+            visible: root.text !== ""
         }
     }
 

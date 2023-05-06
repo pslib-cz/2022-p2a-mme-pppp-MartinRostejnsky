@@ -12,22 +12,27 @@ Item {
         id: meta
     }
     Rectangle {
+        id: rootRectangle
         radius: 4
         z: 1
         anchors.centerIn: parent
 
         color: "white"
-        width: 640
-        height: 800
+        width: Math.min(parent.width, 640 + (anchors.topMargin + anchors.bottomMargin)) - (anchors.leftMargin + anchors.rightMargin)
+        height: Math.min(parent.height, 800 + (anchors.topMargin + anchors.bottomMargin)) - (anchors.topMargin + anchors.bottomMargin)
+
+        anchors.margins: 8
+
 
         ScrollView {
             id: layout
-            width: 640
-            height: 800
-            anchors.centerIn: parent
+            anchors.fill: parent
+            contentWidth: parent.width
+            contentHeight: parent.height
 
             Column {
                 anchors.fill: parent
+
                 anchors.leftMargin: 36
                 anchors.rightMargin: 36
                 anchors.topMargin: 44
@@ -37,14 +42,15 @@ Item {
                     color: "#2f65b0"
                     font.pixelSize: 48
                     font.weight: Font.Bold
+                    width: parent.width - (anchors.leftMargin + anchors.rightMargin)
                     text: "O aplikaci"
                 }
 
                 Text {
-                    width: 640 - 72
                     color: "#565655"
                     font.pixelSize: 24
                     wrapMode: Text.Wrap
+                    width: parent.width - (anchors.leftMargin + anchors.rightMargin)
                     text: `Built using Qt v${meta.qtVersion} and Python v${meta.pyVersion}`
                 }
             }

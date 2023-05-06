@@ -5,13 +5,16 @@ import "../utils" as Utils
 import "../api" as API
 
 Item {
+    id: root
     GridLayout {
         anchors.centerIn: parent
         columns: 2
         rows: 3
 
-        columnSpacing: 100
-        rowSpacing: 100
+        // https://stackoverflow.com/questions/5731863/mapping-a-numeric-range-onto-another
+        // 103 is the height of the navigation header
+        columnSpacing: Math.min((root.width - 800) * (100 - 10) / (1920 - 800) + 10, 100)
+        rowSpacing: Math.min((root.height - (480 - 103)) * (100 - 10) / ((1080 - 103) - 360) + 10, 100)
 
         Text {
             Layout.columnSpan: 2

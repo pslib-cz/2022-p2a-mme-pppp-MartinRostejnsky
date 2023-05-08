@@ -1,18 +1,17 @@
 #!/bin/bash
+set -e
 
 ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
 hwclock --systohc
 
-cp /etc/locale.gen /etc/locale.gen.orig
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo "KEYMAP=cz" > /etc/vconsole.conf
-
-echo "kiosk" > /etc/hostname
-
 useradd -m kiosk
+
+mkdir -p /home/kiosk/.config
+
+cp /installer/weston.ini /home/kiosk/.config
+
 
 echo "Set the root password:"
 passwd root
@@ -24,3 +23,5 @@ grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager.service
 
 echo "Everything is done! Reboot to boot into your new system and to perform additional setup."
+echo "Once ready, enable the weston service:"
+echo "    systemctl enable weston.service"

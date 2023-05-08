@@ -1,0 +1,1 @@
+../install_archlinux_common/launch_kiosk.sh

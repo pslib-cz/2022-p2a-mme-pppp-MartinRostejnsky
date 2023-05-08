@@ -1,5 +1,8 @@
 #!/bin/bash
-set -xe
+set -e
+
+HERE=$(pwd)
+
 IFS=$'\n'
 devices=($(lsblk -d -o NAME -rpn))
 unset IFS
@@ -20,6 +23,8 @@ parted --script "$DEVICE" -- mklabel gpt \
 
 echo "Made following partitions:"
 parted --script "$DEVICE" -- "print"
+
+partprobe "$DEVICE"
 
 IFS=$'\n'
 partitions=($(lsblk "$DEVICE" -o NAME -rpn | tail -n+2))
@@ -59,9 +64,22 @@ if [[ $MICROCODE ]]; then
 fi
 
 #TODO: It might be worth getting something like a session manager into play here
-pacstrap -K /mnt base linux linux-firmware cage nano flatpak networkmanager xorg-xwayland efibootmgr grub $MICROCODE
+pacstrap -K /mnt base linux linux-firmware weston nano flatpak networkmanager xorg-xwayland efibootmgr grub $MICROCODE
 
 genfstab -U /mnt >> /mnt/etc/fstab
+
+mv /mnt/etc/locale.gen /mnt/etc/locale.gen.orig
+echo "en_US.UTF-8 UTF-8" > /mnt/etc/locale.gen
+
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+echo "KEYMAP=cz" > /mnt/etc/vconsole.conf
+
+echo "kiosk" > /mnt/etc/hostname
+
+mkdir -p /mnt/var/lib/kiosk
+cp $HERE/launch_kiosk.sh /mnt/var/lib/kiosk
+
+cp $HERE/weston.service /mnt/etc/systemd/system
 
 mkdir -p /mnt/installer
 

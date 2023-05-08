@@ -1,0 +1,4 @@
+# Ignores HDMI-CEC devices making cage show the cursor when not needed
+ACTION=="add|change", KERNEL=="event[0-9]*", \
+   ATTRS{name}=="vc4-hdmi-*", \
+   ENV{LIBINPUT_IGNORE_DEVICE}="1"

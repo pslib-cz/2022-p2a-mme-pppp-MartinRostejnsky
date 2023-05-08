@@ -1,5 +1,8 @@
 #!/bin/bash
-set -xe
+set -e
+
+HERE=$(pwd)
+
 IFS=$'\n'
 devices=($(lsblk -d -o NAME -rpn))
 unset IFS
@@ -19,6 +22,8 @@ parted --script "$DEVICE" -- mklabel gpt \
 
 echo "Made following partitions:"
 parted --script "$DEVICE" -- "print"
+
+partprobe "$DEVICE"
 
 IFS=$'\n'
 partitions=($(lsblk "$DEVICE" -o NAME -rpn | tail -n+2))
@@ -53,15 +58,32 @@ echo "kiosk" > /tmp/mnt/root/etc/hostname
 
 if [[ -n $IS_RPI4 ]]; then
     # RPI4 boards use a different identifier for the SD card
+    # This will be replaced back automatically when installing the linux-rpi kernel
     sed -i 's/mmcblk0/mmcblk1/g' /tmp/mnt/root/etc/fstab
 fi
 
-cp ./stage2.sh /tmp/mnt/root
-chmod +x /tmp/mnt/root/stage2.sh
+mkdir -p /tmp/mnt/root/installer
+
+cp $HERE/stage2.sh /tmp/mnt/root/installer
+cp -L $HERE/weston.ini /tmp/mnt/root/installer
+chmod +x /tmp/mnt/root/installer/stage2.sh
+
+# copy the service and the autostart script over
+cp -L $HERE/weston.service /tmp/mnt/root/etc/systemd/system
+
+mkdir -p /tmp/mnt/root/var/lib/kiosk
+cp -L $HERE/launch_kiosk.sh /tmp/mnt/root/var/lib/kiosk
 
 sync
 umount /tmp/mnt/{boot,root}
 
 rm -rf /tmp/mnt
 
-echo "Done! Move the SD card to your Pi and run stage2.sh to install the rest."
+# We're telling the user to continue from the Pi because the setup is probably
+# going to be done from a x86_64 computer and we cannot run aarch64 binaries there
+echo "Done! Move the SD card to your Pi, log in as root"
+echo "(password is root), and run /installer/stage2.sh to install the rest."
+echo ""
+echo "Keep in mind that you will probably need an external display for the"
+echo "second installation stage. You will be able to use the official touchscreen"
+echo "afterwards."

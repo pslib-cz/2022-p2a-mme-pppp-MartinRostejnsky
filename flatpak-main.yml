@@ -13,6 +13,9 @@ finish-args:
   - --socket=wayland
   - --device=dri
   - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
+  # Enforce Wayland usage - in some environments the application
+  # tries to use X11, which isn't available in the sandbox
+  - --env=QT_QPA_PLATFORM=wayland
 modules:
   - name: app
     buildsystem: simple

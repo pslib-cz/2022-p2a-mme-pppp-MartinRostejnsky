@@ -1,71 +1,86 @@
-# Sestavení referenční aplikace kiosku
-Tento dokument je návodem, jak sestavit referenční aplikaci kiosku.
+# Building the Reference Kiosk Application
+This document is a guide on how to build the reference kiosk application.
 
-## Požadavky
-- linuxový počítač s nainstalovaným `flatpak` a `flatpak-builder`
-- dostatek diskového prostoru na sestavení aplikace (asi 10 GB volného místa)
+## Requirements
+- A Linux machine with `flatpak`, and `flatpak-builder` installed
+- if building for a different architecture (if building the package for Raspberry Pi on your own PC), `qemu-user-static` has to be installed
+- enough free space on the disk to build the application (about 10 GB of free space)
 
-Pro prvotní sestavení bude také nutné doinstalovat některé základní balíčky pro sestavení aplikace:
+For the first build, additional packages are needed to build the application:
 
 ```bash
-# nativní platforma (ve většině případů x86-64)
+# native platform (x86-64 in most cases)
 sudo ./setup.sh
 
-# sestavení pro ARM64 - hodí se pro instalaci na Raspberry Pi
+# ARM64 builds - useful for Raspberry Pi deployments
 sudo env IS_AARCH64=1 ./setup.sh
 ```
 
-Vše nutné se poté nainstaluje.
+Everything required to build will then be installed.
 
-## Sestavení
-1. Nejdříve sestavte základní aplikaci:
+## Building
+1. Build the main application:
 
     ```bash
-    # nativní platforma (ve většině případů x86-64)
+    # native platform (x86-64 in most cases)
     ./build-main.sh
 
-    # sestavení pro ARM64 - hodí se pro instalaci na Raspberry Pi
+    # ARM64 builds - useful for Raspberry Pi deployments
     IS_AARCH64=1 ./build-main.sh
     ```
 
-1. Poté z ní vytvořte instalační balíček:
+1. Create its installation package:
 
     ```bash
-    # nativní platforma (ve většině případů x86-64)
+    # native platform (x86-64 in most cases)
     ./bundle-main.sh
 
-    # sestavení pro ARM64 - hodí se pro instalaci na Raspberry Pi
+    # ARM64 builds - useful for Raspberry Pi deployments
     IS_AARCH64=1 ./bundle-main.sh
     ```
 
-1. Poté ji nainstalujte – jinak vám nepůjde sestavit GUI:
+1. Install it afterwards - else you won't be able to build the GUI:
 
     ```bash
-    # nativní platforma (ve většině případů x86-64)
+    # native platform (x86-64 in most cases)
     sudo flatpak install kiosk.flatpak
 
-    # sestavení pro ARM64 - hodí se pro instalaci na Raspberry Pi
+    # ARM64 builds - useful for Raspberry Pi deployments
     sudo flatpak install kiosk-aarch64.flatpak 
     ```
+    > **Note**  
+    > The installation package is portable and can be transferred between machines of the same architecture.
 
-1. Podobnými kroky sestavte a nainstalujte GUI:
+1. Using similar steps, build and install the GUI:
 
     ```bash
-    # nativní platforma (ve většině případů x86-64)
+    # native platform (x86-64 in most cases)
     ./build-gui.sh
     ./bundle-gui.sh
     sudo flatpak install kiosk-gui.flatpak
 
-    # sestavení pro ARM64 - hodí se pro instalaci na Raspberry Pi
+    # ARM64 builds - useful for Raspberry Pi deployments
     IS_AARCH64=1 ./build-gui.sh
     IS_AARCH64=1 ./bundle-gui.sh
     sudo flatpak install kiosk-gui-aarch64.flatpak
     ```
 
-1. Následně lze aplikaci spustit:
+1. Transfer `kiosk.flatpak`, and `kiosk-gui.flatpak` (`kiosk-aarch64.flatpak`, and `kiosk-gui-aarch64.flatpak` respectively) to the target machine and install them:
+
+    ```bash
+    # native platform (x86-64 in most cases)
+    sudo flatpak install kiosk.flatpak
+    sudo flatpak install kiosk-gui.flatpak
+
+    # ARM64 builds - useful for Raspberry Pi deployments
+    sudo flatpak install kiosk-aarch64.flatpak
+    sudo flatpak install kiosk-gui-aarch64.flatpak
+    ```
+
+1. The application can be launched on the target machine afterwards:
     ```bash
     flatpak run cz.tttie.KiOS
     ```
 
 > **Note**  
-> Hlavní aplikace a GUI jsou od sebe logicky odděleny. Lze tedy v případě změn sestavit jen GUI, případně sestavit jen hlavní aplikaci atd.
+> The main application and the GUI are logically separated. It is therefore possible to build only the GUI, or build only the main application if changed.

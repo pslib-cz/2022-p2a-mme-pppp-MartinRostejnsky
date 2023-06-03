@@ -1,33 +1,35 @@
-# Informační kiosek
-Cílem tohoto projektu je vytvořit jednoduchý základ pro informační kiosek.
+[Přečíst dokumentaci v češtině](README.cs.md)
 
-## Instalace
-Instalační kroky závisí na použité platformě:
-- [x86_64][install-x86_64]
+# Informational Kiosk System
+The goal of this project is to create a simple base for an informational kiosk system.
+
+## Installation
+The installation steps depend on the used platform for this project:
+- [x86-64][install-x86-64]
 - [Raspberry Pi 3B+/4][install-aarch64]
 
-## Referenční aplikace
-Referenční aplikace zobrazená uživatelům je napsána v Pythonu a QML pomocí frameworků PyQt5 a Qt Quick. Dokumentaci k těmto frameworkům lze nalézt zde:
+## Reference Application
+The reference kiosk application shown to users is written using Python and QML using PyQt5 and Qt Quick frameworks. The documentation sites for these frameworks can be found here:
 - [PyQt][pyqt-docs]
 - [Qt Quick/QML][qt-quick-docs]
 
-Pro lokální vývoj stačí nainstalovat příslušné balíčky (instalaci balíčků pro lokální vývoj tento návod nepokrývá - pro vývoj lze použít i [flatpakovou verzi][build-instructions]). Pro ulehčení lze aplikaci spustit pomocí souboru `run_local.sh`:
+For local development, it is enough to install appropriate packages (this guide doesn't cover their installation, as the [Flatpak version][build-instructions] can be used for this purpose as well). For ease of development, the application can be started using `run_local.sh`:
 
 ```bash
 ./run_local.sh
 ```
 
-Můžete také přejít do složky `app` manuálně a spustit `main.py` přímo:
+However, it is also possible to go to the `app` directory manually and launch `main.py` directly:
 
 ```bash
 cd app
 python3 main.py
 ```
 
-Pro sestavení flatpakové verze určené primárně pro produkční nasazení je dostupný [návod][build-instructions].
+A [guide][build-instructions] is available to build the Flatpak version primarily intended for production deployments.
 
 
-[install-x86_64]: install_archlinux_x86-64/INSTALL.md
+[install-x86-64]: install_archlinux_x86-64/INSTALL.md
 [install-aarch64]: install_archlinux_aarch64_rpi/INSTALL.md
 [build-instructions]: BUILD.md
 

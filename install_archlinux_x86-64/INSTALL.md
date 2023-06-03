@@ -1,56 +1,58 @@
-# Instalace kiosku pro platformu x86-64
-Tento dokument je návodem k instalaci kiosku na platformu x86-64.
+# Installing the Base Kiosk OS on x86-64 Platforms
+This document is a guide on how to install the base kiosk operating system on x86-64 platforms.
 
-## Hardwarové požadavky
-Kiosek by měl fungovat pod jakýmkoli důstojně výkonným hardwarem, včetně integrovaných grafických jader. Nemá-li váš procesor integrovaná grafická jádra nebo chcete raději použít dedikovanou GPU, tak **silně nedoporučujeme** pro tuto sestavu používat GPU od výrobce NVIDIA kvůli nutnosti instalovat dodatečné ovladače. Co se týče diskového prostoru, postačí 32 GB místa.
+## Hardware Requirements
+The kiosk should run on any reasonably performant hardware, including integrated GPUs. If your CPU does not have any, or you prefer to use a dedicated GPU instead, we **strongly do not recommend** to use GPUs by NVIDIA due to the requirement of additional software and limited support of the Wayland protocol. Regarding other requirements:
+- 32 GB of disk space
+- an internet connection
 
-## Příprava k instalaci
-1. Naklonujte celý repozitář kiosku.
-1. Vytvořte instalační archiv:
+## Preparation for Installation
+1. Clone the entire kiosk repository.
+1. Create the installation archive:
 
     ```bash
     ./create-install-x86-64-archive.sh
     ```
-1. Vytvořený archiv (`install_archlinux_x86-64.tar.gz`) můžete přesunout na další USB disk, případně můžete použít pro přenos jednoduchý webový server.
-1. Stáhněte instalační ISO soubor [Arch Linuxu](https://archlinux.org/download/) a vytvořte instalační médium. K vytvoření instalačního média může na Windows posloužit [Rufus](https://rufus.ie/). 
+1. The resulting archive (`install_archlinux_x86-64.tar.gz`) can be copied over to another USB drive, or you can use a simple web server.
+1. Download the [Arch Linux](https://archlinux.org/download/) installation ISO file, and create an installation medium. To create one, [Rufus](https://rufus.ie/) can be used under Windows. 
 
 ## Instalace
-1. Překopírujte nebo stáhněte instalační archiv a extrahujte jej.
+1. Copy or download the installation archive, and extract it.
 
     ```bash
-    # kopírování z externího média
+    # copying from external media
     cp /path/to/install_archlinux_x86-64.tar.gz ~
-    # stažení z webového serveru
+    # downloading from a web server
     curl -O http://website.local/install_archlinux_x86-64.tar.gz
 
     tar xzf install_archlinux_x86-64.tar.gz
     ```
 
     > **Note**  
-    > V případě, že používáte k připojení k internetu Wi-Fi, možná bude nutné vykonat další kroky, viz. [instalační návod Arch Linuxu](https://wiki.archlinux.org/title/Installation_guide#Connect_to_the_internet)
-1. Přejděte do instalačního adresáře a spusťte skript `stage1.sh`:
+    > If you're using Wi-Fi to connect, you might need to do some more steps beforehand. See [the Arch Linux installation guide](https://wiki.archlinux.org/title/Installation_guide#Connect_to_the_internet).
+1. Switch to the installation directory, and launch `stage1.sh`:
 
     ```bash
     cd ./install_archlinux_x86-64
     ./stage1.sh
     ```
-1. Skript by měl vše obstarat automaticky a následně se Vás zeptá na nové heslo k uživateli `root`.
-1. Restartujte do nového systému:
+1. The script should do everything automatically and it will ask you for the password for the `root` user afterwards.
+1. Reboot into the new system:
 
     ```bash
     reboot
     ```
 
-1. Přihlašte se jako uživatel `root` a doinstalujte potřebné aplikace (např. potřebujete-li, SSH server) a dokonfigurujte systém. K nastavení síťového přístupu vám poslouží příkaz `nmtui`. (údaje z instalačního prostředí se nepřenášejí)
+1. Log in as the `root` user, install required applications (e.g. the SSH server, if you need one), and configure the system. For setting up the internet connection, the `nmtui` command can be used. (the credentials from the installation environment are not carried over)
 
-    Příkazy, které se spustí při zapnutí kiosku, lze nastavit v souboru `/var/lib/kiosk/launch_kiosk.sh`. Ve výchozím nastavení spustí referenční aplikaci s identifikátorem `cz.tttie.KiOS` pomocí Flatpaku. 
-1. Zapněte automatické spuštění kompozitoru Weston:
+    The commands to launch when the kiosk starts can be set in `/var/lib/kiosk/launch_kiosk.sh`. In the default setting, a reference application with the identifier of `cz.tttie.KiOS` will be launched using Flatpak. 
+1. Launch the automatic startup of the Weston compositor: 
 
     ```bash
     systemctl enable weston.service
     ```
 
-    Poté počítač restartujte:
+    Restart the computer afterwards:
 
     ```bash
     reboot

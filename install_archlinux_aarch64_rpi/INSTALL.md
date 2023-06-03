@@ -1,15 +1,16 @@
-# Instalace kiosku na Raspberry Pi 3B+/4
-Tento dokument je návodem k instalaci kiosku na jednodeskové počítače Raspberry Pi.
+# Installing the Base Kiosk OS on Raspberry Pi 3B+/4
+This document is a guide on how to install the base kiosk operating system on Raspberry Pi single-board computers.
 
-## Hardwarové požadavky
-- linuxový (virtuální) počítač
-- microSD karta minimálně o velikosti 32 GB
+## Hardware Requirements
+- Linux computer or a virtual machine
+- microSD card with a size of at least 32 GB
 - Raspberry Pi 3B+ / Raspberry Pi 4
-- chcete-li jej používat, oficiální dotykový displej
-- externí monitor (pro spuštění 2. etapy instalace - oficiální dotykový displej **nefunguje** s výchozím jádrem)
+- if you want to use it, the official touch screen
+- internet connection (ideally a wired one)
+- an external monitor (to launch the 2nd stage of installation - the official touch screen **does not work** with the default kernel)
 
-## Instalace
-1. Přejděte do instalačního adresáře a spusťte instalační příkaz:
+## Installation
+1. Go to the installation directory, and launch the installation command:
     - **Raspberry Pi 3B+**:
 
         ```bash
@@ -20,30 +21,42 @@ Tento dokument je návodem k instalaci kiosku na jednodeskové počítače Raspb
         ```bash
         sudo env IS_RPI4=1 ./install.sh
         ```
-1. Vyberte úložiště, kde je vaše SD karta. K nalezení správného disku vám může posloužit příkaz `sudo fdisk -l` v druhém okně.
+1. Pick the device you would like to install the base OS on. To find the correct disk, you can use the `sudo fdisk -l` command in a second terminal window.
     > **Warning**  
-    > Výběrové menu uvádí **všechny dostupné disky na počítači**. Zkontrolujte si, zda jste uvedli správný disk, jelikož vybraný disk bude **formátován**. **Neručíme za případnou ztrátu dat!**
-1. Po ukončení instalačního skriptu vložte SD kartu do vašeho Raspberry Pi, připojte externí monitor, myš, klávesnici a zdroj napájení.
-1. Přihlašte se jako uživatel `root` (heslo je `root`)
-1. Spusťte druhou etapu instalace. K nastavení síťového přístupu vám poslouží příkaz `nmtui`. (údaje z instalačního prostředí se nepřenášejí)
+    > The selection menu lists **all available disks on the computer, including the system one**. Please, double check that you have chosen the correct disk, as the selected disk will be **formatted** and **any data on the disk will be lost**. **We disclaim any responsibility for possible data loss!**
+1. After the installation script finishes, insert the SD card into your Raspberry Pi, connect an external monitor, mouse, keyboard, and power source.
+1. Log in as the `root` user (the password is `root`)
+1. Launch the second stage of installation.
 
     ```bash
     /installer/stage2.sh
     ```
-1. Restartujte vaše Raspberry Pi:
+
+    > **Note**  
+    > An internet connection is needed for this, ideally via Ethernet. If you'd like to use Wi-Fi, use the following command before launching the installation to set it up:
+    > ```bash
+    > wifi-menu
+    > # hide password input
+    > wifi-menu -o
+    > ```
+
+1. Reboot your Raspberry Pi:
 
     ```bash
     reboot
     ```
-1. Přihlašte se jako uživatel `root` a doinstalujte potřebné aplikace (např. potřebujete-li, SSH server) a dokonfigurujte systém.
+1. Log in as the `root` user, install required applications (e.g. an SSH server, if you need one) and configure the system.
 
-    Příkazy, které se spustí při zapnutí kiosku, lze nastavit v souboru `/var/lib/kiosk/launch_kiosk.sh`. Ve výchozím nastavení spustí referenční aplikaci s identifikátorem `cz.tttie.KiOS` pomocí Flatpaku. 
-1. Zapněte automatické spuštění kompozitoru Weston:
+    The commands to launch when the kiosk starts can be set in `/var/lib/kiosk/launch_kiosk.sh`. In the default setting, a reference application with the identifier of `cz.tttie.KiOS` will be launched using Flatpak. 
+
+1. Launch the automatic startup of the Weston compositor: 
+
     ```bash
     systemctl enable weston.service
     ```
 
-   Poté počítač restartujte:
+    Restart the computer afterwards:
+
     ```bash
     reboot
     ```

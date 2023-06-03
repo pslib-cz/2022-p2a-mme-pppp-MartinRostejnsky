@@ -9,8 +9,13 @@ import QtWebEngine 1.10
 import URLUtils 1.0
 import "../utils" as Utils
 import "../api" as API
+import "." as This
 
-WebEngineView {
+Item {
+    id: root
+
+    property alias url: webview.url
+
     property var allowedOrigins: [
         "pslib.cz",
         // Opravdu chceme, aby se nekdo registroval z kiosku na praxe?
@@ -22,36 +27,64 @@ WebEngineView {
         "https://bakalar.pslib.cz/rodice/next/zmeny.aspx"
     ];
 
-    URLUtils {
-        id: urlUtils
-    }
 
-    profile.offTheRecord: true
-    id: webview
-    onNewViewRequested: function(request) {
-        print(`New view requested at ${request.requestedUrl}, origin: ${urlUtils.getOrigin(request.requestedUrl)}`)
-        if (allowedOrigins.includes(urlUtils.getOrigin(request.requestedUrl)) 
-            || allowedUrls.some(x => String(request.requestedUrl).startsWith(x))) {
-            request.openIn(webview)
-        } else {
-            // TODO: Maybe it would be worth it to let the user know?
-            print(`${request.requestedUrl} isn't in the list of allowed origins`)
+    WebEngineView {
+        anchors.fill: root
+        URLUtils {
+            id: urlUtils
+        }
+
+        profile.offTheRecord: true
+        id: webview
+        onNewViewRequested: function(request) {
+            print(`New view requested at ${request.requestedUrl}, origin: ${urlUtils.getOrigin(request.requestedUrl)}`)
+            if (root.allowedOrigins.includes(urlUtils.getOrigin(request.requestedUrl)) 
+                || root.allowedUrls.some(x => String(request.requestedUrl).startsWith(x))) {
+                request.openIn(webview)
+            } else {
+                // TODO: Maybe it would be worth it to let the user know?
+                print(`${request.requestedUrl} isn't in the list of allowed origins`)
+            }
+        }
+        onNavigationRequested: function(request) {
+            print(`Navigation requested at ${request.url}, origin: ${urlUtils.getOrigin(request.url)}`)
+            if (root.allowedOrigins.includes(urlUtils.getOrigin(request.url)) 
+                || root.allowedUrls.some(x => String(request.url).startsWith(x))) {
+                request.action = WebEngineNavigationRequest.AcceptRequest
+            } else {
+                print(`${request.url} isn't in the list of allowed origins`)
+                // TODO: Maybe it would be worth it to let the user know?
+                request.action = WebEngineNavigationRequest.IgnoreRequest
+            }
+        }
+
+        onContextMenuRequested: function(ev) {
+            // Disallow context menus
+            ev.accepted = true;
         }
     }
-    onNavigationRequested: function(request) {
-        print(`Navigation requested at ${request.url}, origin: ${urlUtils.getOrigin(request.url)}`)
-        if (allowedOrigins.includes(urlUtils.getOrigin(request.url)) 
-            || allowedUrls.some(x => String(request.url).startsWith(x))) {
-            request.action = WebEngineNavigationRequest.AcceptRequest
-        } else {
-            print(`${request.url} isn't in the list of allowed origins`)
-            // TODO: Maybe it would be worth it to let the user know?
-            request.action = WebEngineNavigationRequest.IgnoreRequest
+    This.Button {
+        id: btn
+
+        anchors.top: root.top
+        anchors.right: root.right
+
+        anchors.rightMargin: 36
+        anchors.topMargin: 36
+
+        icon.source: "../icons/home_button.svg"
+
+        onClicked: {
+            API.PageSwitcher.navigateTo("home")
+        }
+
+        background: Rectangle {
+            implicitWidth: btn.contentItem.implicitWidth + 2 * 16
+            implicitHeight: btn.contentItem.implicitHeight + 2 * 16
+            radius: 4
+
+            color: "#e9e9e9"
         }
     }
 
-    onContextMenuRequested: function(ev) {
-        // Disallow context menus
-        ev.accepted = true;
-    }
 }

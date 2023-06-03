@@ -3,63 +3,78 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.15
 import "../utils" as Utils
 import "../api" as API
+import "../" as Root
 
 Item {
     id: root
-    GridLayout {
-        anchors.centerIn: parent
-        columns: 2
-        rows: 3
+    Root.Header {
+        id: hdr
 
-        // https://stackoverflow.com/questions/5731863/mapping-a-numeric-range-onto-another
-        // 103 is the height of the navigation header
-        columnSpacing: Math.min((root.width - 800) * (100 - 10) / (1920 - 800) + 10, 100)
-        rowSpacing: Math.min((root.height - (480 - 103)) * (100 - 10) / ((1080 - 103) - 360) + 10, 100)
+        anchors.top: root.top
+        anchors.left: root.left
+        anchors.right: root.right
+    }
 
-        Text {
-            Layout.columnSpan: 2
-            Layout.alignment: Qt.AlignCenter
+    Item {
+        anchors.top: hdr.bottom
+        anchors.bottom: root.bottom
+        anchors.left: root.left
+        anchors.right: root.right
 
-            text: "Kam to bude?"
-            color: "#2f65b0"
+        GridLayout {
+            anchors.centerIn: parent
+            columns: 2
+            rows: 3
 
-            font.weight: Font.ExtraBold
-            font.pixelSize: 80
-        }
+            // https://stackoverflow.com/questions/5731863/mapping-a-numeric-range-onto-another
+            columnSpacing: Math.min((root.width - 800) * (100 - 10) / (1920 - 800) + 10, 100)
+            rowSpacing: Math.min((root.height - 480) * (100 - 10) / (1080 - 360) + 10, 100)
 
-        Utils.MainPageButton {
-            icon: "timetable"
-            text: "Rozvrh"
+            Text {
+                Layout.columnSpan: 2
+                Layout.alignment: Qt.AlignCenter
 
-            btn.onClicked: {
-                API.PageSwitcher.navigateTo("timetable")
+                text: "Kam to bude?"
+                color: "#2f65b0"
+
+                font.weight: Font.ExtraBold
+                font.pixelSize: 80
             }
-        }
 
-        Utils.MainPageButton {
-            icon: "suplovani"
-            text: "Suplování"
+            Utils.MainPageButton {
+                icon: "timetable"
+                text: "Rozvrh"
 
-            btn.onClicked: {
-                API.PageSwitcher.navigateTo("suplovani")
+                btn.onClicked: {
+                    API.PageSwitcher.navigateTo("timetable")
+                }
             }
-        }
 
-        Utils.MainPageButton {
-            icon: "web"
-            text: "Web"
+            Utils.MainPageButton {
+                icon: "suplovani"
+                text: "Suplování"
 
-            btn.onClicked: {
-                API.PageSwitcher.navigateTo("web")
+                btn.onClicked: {
+                    API.PageSwitcher.navigateTo("suplovani")
+                }
             }
-        }
 
-        Utils.MainPageButton {
-            icon: "about"
-            text: "O aplikaci"
+            Utils.MainPageButton {
+                icon: "web"
+                text: "Web"
 
-            btn.onClicked: {
-                API.PageSwitcher.navigateTo("about")
+                btn.onClicked: {
+                    API.PageSwitcher.navigateTo("web")
+                }
+            }
+
+            Utils.MainPageButton {
+                icon: "about"
+                text: "O aplikaci"
+
+                btn.onClicked: {
+                    API.PageSwitcher.navigateTo("about")
+                }
             }
         }
     }

@@ -14,16 +14,11 @@ ApplicationWindow {
 
     font.family: "Noto Sans"
 
-    visibility: "FullScreen"
+    // visibility: "FullScreen"
 
     title: "KiOS"
-
-    header: Header {
-        id: hdr
-    }
-
     StackView {
-        anchors.topMargin: -6
+        // anchors.topMargin: -6
         id: root
         background: Rectangle {
             color: "#e9e9e9"

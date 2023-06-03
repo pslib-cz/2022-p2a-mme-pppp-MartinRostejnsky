@@ -5,12 +5,63 @@ import QtQuick.Layouts 1.15
 import Meta 1.0
 import "../utils" as Utils
 import "../api" as API
+import "../components" as Components
 
 Item {
     id: root
+
     Meta {
         id: meta
     }
+
+    Image {
+        id: skola
+        source: "../images/skola.png"
+
+        anchors.fill: parent
+
+        fillMode: Image.PreserveAspectCrop
+    }
+    Rectangle {
+        id: bg
+        anchors.fill: parent
+        color: "#72e9e9e9"
+    }
+
+
+    Blend {
+        z: 0
+        source: skola
+        foregroundSource: bg
+        anchors.fill: parent
+    }
+
+    Components.Button {
+        id: btn
+        z: 2
+
+        anchors.top: root.top
+        anchors.right: root.right
+
+        anchors.rightMargin: 36
+        anchors.topMargin: 36
+
+        icon.source: "../icons/home_button.svg"
+
+        onClicked: {
+            API.PageSwitcher.navigateTo("home")
+        }
+
+        background: Rectangle {
+            implicitWidth: btn.contentItem.implicitWidth + 2 * 16
+            implicitHeight: btn.contentItem.implicitHeight + 2 * 16
+
+            radius: 4
+
+            color: "#e9e9e9"
+        }
+    }
+
     Rectangle {
         id: rootRectangle
         radius: 4
@@ -55,27 +106,5 @@ Item {
                 }
             }
         }
-    }
-
-    Image {
-        id: skola
-        source: "../images/skola.png"
-
-        anchors.fill: parent
-
-        fillMode: Image.PreserveAspectCrop
-    }
-    Rectangle {
-        id: bg
-        anchors.fill: parent
-        color: "#72e9e9e9"
-    }
-
-
-    Blend {
-        z: 0
-        source: skola
-        foregroundSource: bg
-        anchors.fill: parent
     }
 }

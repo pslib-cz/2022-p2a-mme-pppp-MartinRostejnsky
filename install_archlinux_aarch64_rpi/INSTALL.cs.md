@@ -1,5 +1,7 @@
-# Instalace základového OS kiosku na Raspberry Pi 3B+/4
-Tento dokument je návodem k instalaci základového operačního systému kiosku na jednodeskové počítače Raspberry Pi.
+# Instalace základového OS kiosku na Raspberry Pi 3B+/4  
+Tento dokument je návodem k instalaci základového operačního systému kiosku na jednodeskové počítače Raspberry Pi.  
+>**Note**  
+> Pokud chcete využít náš [návod k sestavení HW](../assemble_rpi_hw/ASSEMBLY.cs.md), silně doporučujeme si ho přečíst s předstihem.  
 
 ## Hardwarové požadavky
 - linuxový (virtuální) počítač

@@ -1,5 +1,7 @@
 # Installing the Base Kiosk OS on Raspberry Pi 3B+/4
-This document is a guide on how to install the base kiosk operating system on Raspberry Pi single-board computers.
+This document is a guide on how to install the base kiosk operating system on Raspberry Pi single-board computers.  
+>**Note**  
+> If you want to use our [HW assembly guide](../assemble_rpi_hw/ASSEMBLY.md), we strongly recommend reading it beforehand.
 
 ## Hardware Requirements
 - Linux computer or a virtual machine

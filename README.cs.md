@@ -28,6 +28,12 @@ python3 main.py
 
 Pro sestavení flatpakové verze určené primárně pro produkční nasazení je dostupný [návod][build-instructions].
 
+## Licence
+Tento projekt je licencován následovně:
+- Dokumentace k projektu společně se složkou `assemble_rpi_hw` je licencována pod licencí [CC BY-SA 4.0](LICENSE-DOCS).
+- Referenční aplikace obsahuje ve složce `qml/fonts` písmo [Noto Sans][noto-sans] šířené pod licencí [SIL OFL 1.1](qml/fonts/OFL.txt).
+- Zbytek projektu je licencován pod licencí [GPL 3.0 nebo novějšími verzemi](LICENSE).
+
 
 [install-x86-64]: install_archlinux_x86-64/INSTALL.cs.md
 [install-aarch64]: install_archlinux_aarch64_rpi/INSTALL.cs.md
@@ -36,3 +42,4 @@ Pro sestavení flatpakové verze určené primárně pro produkční nasazení j
 
 [pyqt-docs]: https://www.riverbankcomputing.com/static/Docs/PyQt5/
 [qt-quick-docs]: https://doc.qt.io/qt-5/qtquick-index.html
+[noto-sans]: https://fonts.google.com/noto/specimen/Noto+Sans

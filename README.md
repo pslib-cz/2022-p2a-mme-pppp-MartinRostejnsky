@@ -28,6 +28,12 @@ python3 main.py
 
 A [guide][build-instructions] is available to build the Flatpak version primarily intended for production deployments.
 
+## License
+This project is licensed as follows:
+- The documentation for this project along with the `assemble_rpi_hw` folder are licensed under the [CC BY-SA 4.0](LICENSE-DOCS) license.
+- The reference application contains the [Noto Sans][noto-sans] in the `qml/fonts` directory distributed under the [SIL OFL 1.1](qml/fonts/OFL.txt) license.
+- The rest of the project is licensed under [GPL-3.0-or-later](LICENSE) license.
+
 
 [install-x86-64]: install_archlinux_x86-64/INSTALL.md
 [install-aarch64]: install_archlinux_aarch64_rpi/INSTALL.md
@@ -36,3 +42,4 @@ A [guide][build-instructions] is available to build the Flatpak version primaril
 
 [pyqt-docs]: https://www.riverbankcomputing.com/static/Docs/PyQt5/
 [qt-quick-docs]: https://doc.qt.io/qt-5/qtquick-index.html
+[noto-sans]: https://fonts.google.com/noto/specimen/Noto+Sans

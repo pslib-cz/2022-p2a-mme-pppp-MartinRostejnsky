@@ -31,7 +31,7 @@ A [guide][build-instructions] is available to build the Flatpak version primaril
 ## License
 This project is licensed as follows:
 - The documentation for this project along with the `assemble_rpi_hw` folder are licensed under the [CC BY-SA 4.0](LICENSE-DOCS) license.
-- The reference application contains the [Noto Sans][noto-sans] in the `qml/fonts` directory distributed under the [SIL OFL 1.1](qml/fonts/OFL.txt) license.
+- The reference application contains the [Noto Sans][noto-sans] font in the `qml/fonts` directory distributed under the [SIL OFL 1.1](qml/fonts/OFL.txt) license.
 - The rest of the project is licensed under [GPL-3.0-or-later](LICENSE) license.
 
 

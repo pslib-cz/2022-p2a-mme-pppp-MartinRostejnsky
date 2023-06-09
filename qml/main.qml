@@ -4,15 +4,16 @@ import QtQuick.Layouts 1.15
 
 import "api" as API
 import "utils" as Utils
+import "./Constants.js" as Constants
 
 ApplicationWindow {
     visible: true
     color: "white"
 
-    minimumWidth: 800
-    minimumHeight: 480
+    minimumWidth: 50 * Constants.baseSize
+    minimumHeight: 30 * Constants.baseSize
 
-    font.family: "Noto Sans"
+    font.family: Constants.fontFamily
 
     // visibility: "FullScreen"
 
@@ -21,7 +22,7 @@ ApplicationWindow {
         // anchors.topMargin: -6
         id: root
         background: Rectangle {
-            color: "#e9e9e9"
+            color: Constants.backgroundColor
         }
         anchors.fill: parent
 
@@ -29,13 +30,13 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        API.PageSwitcher.setRoot(root)
-        API.PageSwitcher.createPage("home", "MainPage.qml");
-        API.PageSwitcher.createPage("about", "AboutPage.qml");
-        API.PageSwitcher.createPage("web", "WebPage.qml");
-        API.PageSwitcher.createPage("timetable", "TimeTablePage.qml");
-        API.PageSwitcher.createPage("suplovani", "SubstitutionsPage.qml");
-        API.PageSwitcher.navigateTo("home")
+        API.PageSwitcher.setRoot(root);
+
+        for (const [pageName, pageFile] of Object.entries(Constants.pages)) {
+            API.PageSwitcher.createPage(pageName, pageFile);
+        }
+
+        API.PageSwitcher.navigateTo(Constants.landingPage);
     }
 
 }

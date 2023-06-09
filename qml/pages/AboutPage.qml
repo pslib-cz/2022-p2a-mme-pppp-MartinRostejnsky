@@ -6,6 +6,7 @@ import Meta 1.0
 import "../utils" as Utils
 import "../api" as API
 import "../components" as Components
+import "../Constants.js" as Constants
 
 Item {
     id: root
@@ -36,43 +37,19 @@ Item {
         anchors.fill: parent
     }
 
-    Components.Button {
-        id: btn
-        z: 2
-
-        anchors.top: root.top
-        anchors.right: root.right
-
-        anchors.rightMargin: 36
-        anchors.topMargin: 36
-
-        icon.source: "../icons/home_button.svg"
-
-        onClicked: {
-            API.PageSwitcher.navigateTo("home")
-        }
-
-        background: Rectangle {
-            implicitWidth: btn.contentItem.implicitWidth + 2 * 16
-            implicitHeight: btn.contentItem.implicitHeight + 2 * 16
-
-            radius: 4
-
-            color: "#e9e9e9"
-        }
-    }
+    Components.HomeButton {}
 
     Rectangle {
         id: rootRectangle
-        radius: 4
+        radius: Constants.baseSize / 4
         z: 1
         anchors.centerIn: parent
 
         color: "white"
-        width: Math.min(parent.width, 640 + (anchors.topMargin + anchors.bottomMargin)) - (anchors.leftMargin + anchors.rightMargin)
-        height: Math.min(parent.height, 800 + (anchors.topMargin + anchors.bottomMargin)) - (anchors.topMargin + anchors.bottomMargin)
+        width: Math.min(parent.width, 40 * Constants.baseSize + (anchors.topMargin + anchors.bottomMargin)) - (anchors.leftMargin + anchors.rightMargin)
+        height: Math.min(parent.height, 50 * Constants.baseSize + (anchors.topMargin + anchors.bottomMargin)) - (anchors.topMargin + anchors.bottomMargin)
 
-        anchors.margins: 8
+        anchors.margins: Constants.baseSize / 2
 
 
         ScrollView {
@@ -84,22 +61,24 @@ Item {
             Column {
                 anchors.fill: parent
 
-                anchors.leftMargin: 36
-                anchors.rightMargin: 36
-                anchors.topMargin: 44
-                anchors.bottomMargin: 44
+                anchors.leftMargin: 2.25 * Constants.baseSize
+                anchors.rightMargin: 2.25 * Constants.baseSize
+                anchors.topMargin: 2.75 * Constants.baseSize
+                anchors.bottomMargin: 2.75 * Constants.baseSize
                 
                 Text {
-                    color: "#2f65b0"
-                    font.pixelSize: 48
+                    color: Constants.headingColor
+                    font.pixelSize: 4 * Constants.baseSize
+                    font.family: Constants.fontFamily
                     font.weight: Font.Bold
                     width: parent.width - (anchors.leftMargin + anchors.rightMargin)
                     text: "O aplikaci"
                 }
 
                 Text {
-                    color: "#565655"
-                    font.pixelSize: 24
+                    color: Constants.textColor
+                    font.pixelSize: 1.5 * Constants.baseSize
+                    font.family: Constants.fontFamily
                     wrapMode: Text.Wrap
                     width: parent.width - (anchors.leftMargin + anchors.rightMargin)
                     text: `Built using Qt v${meta.qtVersion} and Python v${meta.pyVersion}`

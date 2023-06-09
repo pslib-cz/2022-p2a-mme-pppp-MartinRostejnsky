@@ -4,13 +4,14 @@ import QtQuick.Layouts 1.15
 import "utils" as Utils
 import "components" as Components
 import "api" as API
+import "./Constants.js" as Constants
 
 Rectangle {
     id: root
 
-    anchors.leftMargin: 36
-    anchors.rightMargin: 36
-    height: 96
+    anchors.leftMargin: 2.25 * Constants.baseSize
+    anchors.rightMargin: 2.25 * Constants.baseSize
+    height: 6 * Constants.baseSize
 
     color: "transparent"
 
@@ -18,16 +19,20 @@ Rectangle {
         anchors.left: root.left
         anchors.verticalCenter: root.verticalCenter
         source: "icons/logo.svg"
+
+        height: 3.75 * Constants.baseSize
+        width: 14.125 * Constants.baseSize
     }
 
     Text {
         id: time
         anchors.right: root.right
         anchors.verticalCenter: root.verticalCenter
-        color: "#565655"
+        color: Constants.textColor
         font.weight: Font.Bold
+        font.family: Constants.fontFamily
 
-        font.pixelSize: 24
+        font.pixelSize: 1.5 * Constants.baseSize
         text: Qt.formatDateTime(new Date(), "dd. MM. yyyy hh:mm:ss")
     }
     Timer {

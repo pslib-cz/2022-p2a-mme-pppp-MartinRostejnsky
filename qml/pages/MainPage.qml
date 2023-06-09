@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.15
 import "../utils" as Utils
 import "../api" as API
 import "../" as Root
+import "../Constants.js" as Constants
 
 Item {
     id: root
@@ -27,18 +28,19 @@ Item {
             rows: 3
 
             // https://stackoverflow.com/questions/5731863/mapping-a-numeric-range-onto-another
-            columnSpacing: Math.min((root.width - 800) * (100 - 10) / (1920 - 800) + 10, 100)
-            rowSpacing: Math.min((root.height - 480) * (100 - 10) / (1080 - 360) + 10, 100)
+            columnSpacing: Math.min((root.width - 50 * Constants.baseSize) * (6.25 * Constants.baseSize - 0.625 * Constants.baseSize) / (120 * Constants.baseSize - 50 * Constants.baseSize) + 0.625 * Constants.baseSize, 6.25 * Constants.baseSize)
+            rowSpacing: Math.min((root.height - 30 * Constants.baseSize) * (6.25 * Constants.baseSize - 0.625 * Constants.baseSize) / (67.5 * Constants.baseSize - 30 * Constants.baseSize) + 0.625 * Constants.baseSize, 6.25 * Constants.baseSize)
 
             Text {
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignCenter
 
                 text: "Kam to bude?"
-                color: "#2f65b0"
+                color: Constants.headingColor
 
+                font.family: Constants.fontFamily
                 font.weight: Font.ExtraBold
-                font.pixelSize: 80
+                font.pixelSize: 5 * Constants.baseSize
             }
 
             Utils.MainPageButton {

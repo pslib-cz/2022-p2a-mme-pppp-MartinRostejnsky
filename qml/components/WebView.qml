@@ -9,7 +9,7 @@ import QtWebEngine 1.10
 import URLUtils 1.0
 import "../utils" as Utils
 import "../api" as API
-import "." as This
+import "../Constants.js" as Constants
 
 Item {
     id: root
@@ -63,28 +63,6 @@ Item {
             ev.accepted = true;
         }
     }
-    This.Button {
-        id: btn
-
-        anchors.top: root.top
-        anchors.right: root.right
-
-        anchors.rightMargin: 36
-        anchors.topMargin: 36
-
-        icon.source: "../icons/home_button.svg"
-
-        onClicked: {
-            API.PageSwitcher.navigateTo("home")
-        }
-
-        background: Rectangle {
-            implicitWidth: btn.contentItem.implicitWidth + 2 * 16
-            implicitHeight: btn.contentItem.implicitHeight + 2 * 16
-            radius: 4
-
-            color: "#e9e9e9"
-        }
-    }
-
+    
+    HomeButton {}
 }

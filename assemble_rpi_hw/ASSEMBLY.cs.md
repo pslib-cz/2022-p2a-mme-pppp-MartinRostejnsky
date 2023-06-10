@@ -15,7 +15,7 @@ Tento dokument je návodem k sestavení kiosku za použití jednodeskového poč
 
 ## 3D tištění krabice (nepovinné)  
 > **Note**  
-> Silně doporučujeme zvolit tento krok jako první, vzhledem k tomu že tisk trvá nějakou dobu, a takhle může tiskárna pracovat zatímco vy budete pokračovat instalaci/stavbě.  
+> Silně doporučujeme zvolit tento krok jako první, vzhledem k tomu že tisk trvá nějakou dobu a takhle může tiskárna pracovat, zatímco vy budete pokračovat v instalaci/stavbě.  
 
 1. Stáhněte si STL soubor který chcete:  
     > **Warning**  
@@ -41,13 +41,13 @@ Tento dokument je návodem k sestavení kiosku za použití jednodeskového poč
       ![Napájení displeje připojeného k RPi za použití dvou propojovacích kabelů](images/touchscreen_jumper_pwr.jpg)  
     - **Externí Micro-USB zdroj 5V napájení.**
 
-        > **Warning**
+        > **Warning**  
         > Na Micro-USB kabel není krabička přizpůsobena, nedoporučujeme ho tedy použít.
 
       ![Touchscreen napájený Micro-USB](images/touchscreen_microusb_pwr.jpg)
 2. Připojte displej k RPi za použití páskového kabelu.
     > **Warning**  
-    > Toto není další způsob připojení napájení pro displej, páskový kabel slouží k přenosu dat. (tzn. musíte připojit napájení I páskový kabel)  
+    > Toto není další způsob připojení napájení pro displej, páskový kabel slouží k přenosu dat. (tzn. musíte připojit napájení **a zároveň** páskový kabel)  
     
     RPi by mělo být položeno portem pro displej nad portem na adaptéru dotykového displeje, takže se připojí jako je ukázáno na obrázku níže. (přirozeně, nezamotaně).
 

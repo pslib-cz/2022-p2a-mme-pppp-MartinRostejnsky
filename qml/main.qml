@@ -15,7 +15,7 @@ ApplicationWindow {
 
     font.family: Constants.fontFamily
 
-    // visibility: "FullScreen"
+    visibility: "FullScreen"
 
     title: "KiOS"
     StackView {

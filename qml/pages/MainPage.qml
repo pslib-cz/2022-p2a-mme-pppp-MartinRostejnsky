@@ -35,7 +35,7 @@ Item {
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignCenter
 
-                text: "Kam to bude?"
+                text: Constants.mainPageText["heading"]
                 color: Constants.headingColor
 
                 font.family: Constants.fontFamily
@@ -45,7 +45,7 @@ Item {
 
             Utils.MainPageButton {
                 icon: "timetable"
-                text: "Rozvrh"
+                text: Constants.mainPageText["btn1"]
 
                 btn.onClicked: {
                     API.PageSwitcher.navigateTo("timetable")
@@ -54,7 +54,7 @@ Item {
 
             Utils.MainPageButton {
                 icon: "suplovani"
-                text: "Suplování"
+                text: Constants.mainPageText["btn2"]
 
                 btn.onClicked: {
                     API.PageSwitcher.navigateTo("suplovani")
@@ -63,7 +63,7 @@ Item {
 
             Utils.MainPageButton {
                 icon: "web"
-                text: "Web"
+                text: Constants.mainPageText["btn3"]
 
                 btn.onClicked: {
                     API.PageSwitcher.navigateTo("web")
@@ -72,7 +72,7 @@ Item {
 
             Utils.MainPageButton {
                 icon: "about"
-                text: "O aplikaci"
+                text: Constants.mainPageText["btn4"]
 
                 btn.onClicked: {
                     API.PageSwitcher.navigateTo("about")

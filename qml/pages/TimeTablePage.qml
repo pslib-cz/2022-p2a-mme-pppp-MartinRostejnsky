@@ -1,11 +1,17 @@
 //pip install PyQtWebEngine
 //This concept is more of an experiment
 
+import URLUtils 1.0
 import "../components" as Components
+import "../Constants.js" as Constants
 
 Components.WebView {
-    url: "https://bakalar.pslib.cz/rodice/Timetable/Public"
+    url: Constants.urls["timetable"]
     allowedOrigins: [
-        "bakalar.pslib.cz"
+        urlUtils.getOrigin(Constants.urls["timetable"])
     ]
+
+    URLUtils {
+        id: urlUtils
+    }
 }

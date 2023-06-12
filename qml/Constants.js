@@ -70,3 +70,39 @@ const pages = {
     timetable: "TimeTablePage.qml",
     suplovani: "SubstitutionsPage.qml",
 };
+
+/**
+ * The initial links opened within the WebViews
+ * 
+ * Počáteční odkazy webových prohlížečů
+ */
+
+const urls = {
+    web: "https://pslib.cz",
+    timetable: "https://bakalar.pslib.cz/rodice/Timetable/Public",
+    suplovani: "https://bakalar.pslib.cz/rodice/next/zmeny.aspx"
+};
+
+/**
+ * Origins allowed withing the WebViews (unless overwritten)
+ * 
+ * Odkazy povolené ve webových prohlížečích (pokud není uvedeno jinak)
+ */
+
+const allowedOrigins = [
+    "pslib.cz",
+];
+
+/**
+ * Text displayed on the main page
+ * 
+ * Text zobrazovaný na domovské stránce
+ */
+
+const mainPageText = {
+    heading: "Kam to bude?",
+    btn1: "Rozvrh",
+    btn2: "Suplování",
+    btn3: "Web",
+    btn4: "O aplikaci"
+};

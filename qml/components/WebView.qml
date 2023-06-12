@@ -16,11 +16,7 @@ Item {
 
     property alias url: webview.url
 
-    property var allowedOrigins: [
-        "pslib.cz",
-        // Opravdu chceme, aby se nekdo registroval z kiosku na praxe?
-        "praxe2.pslib.cloud"
-    ]
+    property var allowedOrigins: Constants.allowedOrigins
 
     property var allowedUrls: [
         "https://bakalar.pslib.cz/rodice/Timetable/Public",

@@ -38,7 +38,6 @@ Item {
                 || root.allowedUrls.some(x => String(request.requestedUrl).startsWith(x))) {
                 request.openIn(webview)
             } else {
-                // TODO: Maybe it would be worth it to let the user know?
                 fadeIn.start()
                 errorTimer.start()
                 console.warn(`${request.requestedUrl} isn't in the list of allowed origins`)
@@ -51,7 +50,6 @@ Item {
                 request.action = WebEngineNavigationRequest.AcceptRequest
             } else {
                 console.warn(`${request.url} isn't in the list of allowed origins`)
-                // TODO: Maybe it would be worth it to let the user know?
 
                 fadeIn.start()
                 errorTimer.start()

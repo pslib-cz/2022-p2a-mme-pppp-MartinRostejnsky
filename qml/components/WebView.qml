@@ -100,7 +100,7 @@ Item {
             from: 0
             to: 1
 
-            easing.bezierCurve: Easing.InOutQuad
+            easing.type: Easing.InOutQuad
 
             running: false
 
@@ -112,7 +112,7 @@ Item {
             from: 1
             to: 0
 
-            easing.bezierCurve: Easing.OutInQuad
+            easing.type: Easing.OutInQuad
 
             running: false
 

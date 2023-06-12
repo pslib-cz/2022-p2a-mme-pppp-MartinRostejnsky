@@ -106,3 +106,34 @@ const mainPageText = {
     btn3: "Web",
     btn4: "O aplikaci"
 };
+
+/**
+ * The error window background color
+ * 
+ * Barva chyboveho okna
+ */
+const errorBackground = "#CCB90737";
+
+/**
+ * The error window text color
+ * 
+ * Barva textu chyboveho okna
+ */
+const errorTextColor = "white";
+
+/**
+ * The error message to show when navigating to a disallowed page
+ * 
+ * Chybova hlaska, ktera se zobrazi, kdyz uzivatel naviguje na zakazanou
+ * stranku
+ */
+const forbiddenNavigationText = "Toto ti nedovolím!";
+
+/**
+ * The duration of animations throughout the application
+ * in milliseconds
+ *  
+ * Delka animaci v aplikaci v milisekundach
+ */
+const animationDuration = 300;
+

@@ -66,7 +66,7 @@ Item {
     }
 
     Rectangle {
-        color: "#CCB90737"
+        color: Constants.errorBackground
         id: errorRect
 
         z: 999
@@ -74,7 +74,7 @@ Item {
 
         anchors.horizontalCenter: root.horizontalCenter
         anchors.bottom: root.bottom
-        anchors.bottomMargin: 140
+        anchors.bottomMargin: 8.75 * Constants.baseSize
 
         width: text.width + 2 * Constants.baseSize
         height: text.height + 2 * Constants.baseSize
@@ -83,7 +83,7 @@ Item {
 
         Text {
             id: text
-            color: "white"
+            color: Constants.errorTextColor
 
             anchors.centerIn: errorRect
             anchors.margins: Constants.baseSize
@@ -92,7 +92,7 @@ Item {
             font.weight: Font.Bold
             font.family: Constants.fontFamily
 
-            text: "Toto ti nedovolím!"
+            text: Constants.forbiddenNavigationText
         }
 
         NumberAnimation on opacity {
@@ -104,7 +104,7 @@ Item {
 
             running: false
 
-            duration: 300
+            duration: Constants.animationDuration
         }
 
         NumberAnimation on opacity {
@@ -116,12 +116,12 @@ Item {
 
             running: false
 
-            duration: 300
+            duration: Constants.animationDuration
         }
 
         Timer {
             id: errorTimer
-            interval: 5000
+            interval: 2500
 
             onTriggered: fadeOut.start()
         }
